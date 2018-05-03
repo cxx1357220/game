@@ -90,15 +90,6 @@ export default class Player extends Animation {
         speed = - 0.2
     }).bind(this))
 
-    // canvas.addEventListener('touchmove', ((e) => {
-    //   e.preventDefault()
-    //   console.log(1)
-
-    //   if ( this.touched )
-    //     this.setAirPosAcrossFingerPosZ(x, y)
-
-    // }).bind(this))
-
     canvas.addEventListener('touchend', ((e) => {
       e.preventDefault()
       speed = 0.2

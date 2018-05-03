@@ -7,7 +7,8 @@ import DataBus from './databus'
 let ctx = canvas.getContext('2d')
 let databus = new DataBus()
 let speed = 6
-
+let atlas = new Image()
+atlas.src = 'images/Common.png'
 
 /**
  * 游戏主函数
@@ -16,8 +17,8 @@ export default class Main {
   constructor() {
     // 维护当前requestAnimationFrame的id
     this.aniId = 0
-
-    this.restart()
+     this.restart()
+     databus.gameOver = 2
   }
 
   restart() {
@@ -31,7 +32,6 @@ export default class Main {
     this.bg = new BackGround(ctx)
     this.player = new Player(ctx)
     this.gameinfo = new GameInfo()
-
     this.bindLoop = this.loop.bind(this)
     this.hasEventBind = false
 
@@ -113,9 +113,17 @@ export default class Main {
     this.gameinfo.renderGameScore(ctx, databus.score)
 
     // 游戏结束停止帧循环
-    if (databus.gameOver) {
+    if (databus.gameOver==true) {
       this.gameinfo.renderGameOver(ctx, databus.score)
-
+      if (!this.hasEventBind) {
+        this.hasEventBind = true
+        this.touchHandler = this.touchEventHandler.bind(this)
+        canvas.addEventListener('touchstart', this.touchHandler)
+      }
+    }
+    //游戏刚开始
+    if (databus.gameOver==2) {
+      this.gameinfo.renderGame(ctx)
       if (!this.hasEventBind) {
         this.hasEventBind = true
         this.touchHandler = this.touchEventHandler.bind(this)
