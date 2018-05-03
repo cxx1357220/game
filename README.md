@@ -1,5 +1,7 @@
 ## quickstart
 
+https://github.com/cxx1357220/game.git
+
 ## 源码目录介绍
 ```
 ./js
